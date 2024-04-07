@@ -4,7 +4,7 @@ A web application that allows users to generate and view mazes
 [cameronrolfe.github.io/MazeWebApp/](https://cameronrolfe.github.io/MazeWebApp)
 
 # Features
-![Website](website.png)
+![Maze Web App](MazeWebApp.png)
 
 The input fields allow the users to customize the size, starting cell and end cell of the maze
 
