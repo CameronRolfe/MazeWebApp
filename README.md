@@ -1,7 +1,7 @@
 # MazeWebApp
 A web application that allows users to generate and view mazes
 
-[cameronrolfe.github.io/MazeWebApp/]("cameronrolfe.github.io/MazeWebApp/")
+[cameronrolfe.github.io/MazeWebApp/](https://cameronrolfe.github.io/MazeWebApp)
 
 # Features
 ![Website](website.png)
