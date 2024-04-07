@@ -2,6 +2,7 @@ import './App.css';
 import {useEffect, useState} from "react"
 import MazeImage from './components/MazeImage';
 import MazeGenerator from './components/MazeGenerator';
+import MazeButton from './components/MazeButton';
 const Maze = require("camsmazes");
 
 function App() {
@@ -27,19 +28,28 @@ function App() {
   const settingsHTML = settings.map(setting => 
       <div key={setting.id}>
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={setting.id}>{setting.text}</label>
-          <input id = {setting.id} className="text-center w-12 border-2 valid:border-blue-500 invalid:border-red-500 focus:border-indigo-500 rounded outline-none" type="number" value={setting.value} min = {setting.range[0]} max = {setting.range[1]} onChange={(e) => setting.setter(e.target.value)}></input>
+          <input 
+            id = {setting.id} 
+            className="text-center w-12 border-2 valid:border-blue-500 invalid:border-red-500 focus:border-black rounded outline-none" 
+            type="number" value={setting.value} 
+            min = {setting.range[0]} 
+            max = {setting.range[1]} 
+            onChange={(e) => setting.setter(e.target.value)}>
+          </input>
       </div>
   )
 
   const generateMaze = () => {
-     if (startRow < 0 || startRow >= numRows) return;
-     if (startCol < 0 || startCol >= numCols) return;
-     if (endRow < 0 || endRow >= numRows) return;
-     if (endCol < 0 || endCol >= numCols) return;
+    if (numRows < 10 || numRows > 200) return;
+    if (numCols < 10 || numCols > 200) return;
+    if (startRow < 0 || startRow >= numRows) return;
+    if (startCol < 0 || startCol >= numCols) return;
+    if (endRow < 0 || endRow >= numRows) return;
+    if (endCol < 0 || endCol >= numCols) return;
 
-      const maze = new Maze(numRows, numCols, startRow, startCol, endCol, endRow)
-      setMaze(maze)
-      setShowSolution(false)
+    const maze = new Maze(numRows, numCols, startRow, startCol, endCol, endRow)
+    setMaze(maze)
+    setShowSolution(false)
   }
 
   const getScreenSize = () => {
@@ -56,11 +66,9 @@ function App() {
   useEffect(() => {
     const handleResize = () => {
       const newScreenSize = getScreenSize();
+      console.log("screenSize", newScreenSize)
       if (newScreenSize !== screenSize) {
         setScreensize(newScreenSize);
-        if (mode === "generation") {
-            setMode("image")
-        } 
       } 
     }
      
@@ -71,29 +79,12 @@ function App() {
   }, [])
   return (
     <div className="App">
-        <div className="m-auto grid grid-cols-2 w-1/2 max-w-40">
+        <div className="m-auto grid grid-cols-2 w-1/2 max-w-40 ">
             {settingsHTML}
         </div>
-        {(mode === "image") ? <button className="flex mx-auto px-4 mt-5 rounded-full text-white bg-blue-500" onClick={() => generateMaze()}>Generate Maze</button> : null}
-        {
-          (mode === "image") ?  
-          <button 
-            className={"flex mx-auto px-4 mt-5 rounded-full text-white bg-blue-500"} 
-            onClick={() =>setMode("generation")}
-          >
-          Show Generation
-          </button> : null
-        }
-        {
-          (mode === "image") ?  
-          <button 
-            className={`flex mx-auto px-4 mt-5 rounded-full text-white ${(mode === "image") ? "bg-blue-500" : "bg-red-500"}`} 
-            onClick={() =>setShowSolution(!showSolution)}
-          >
-          {(showSolution) ? "Hide Solution" : "Show Solution"}
-          </button> : null
-        }
-       
+        {(mode === "image") ? <MazeButton primaryColour={"blue-500"} buttonText={"Generate Maze"} onClick={() => generateMaze()}/> : null}
+        {(mode === "image") ? <MazeButton primaryColour={"blue-500"} buttonText={"Show Generation"} onClick={() => setMode("generation")}/> : null}
+        {(mode === "image") ? <MazeButton primaryColour={"blue-500"} buttonText={(showSolution) ? "Hide Solution" : "Show Solution"} onClick={() => setShowSolution(!showSolution)}/> : null}
         {(mode==="image") ? <MazeImage mazeImageStr={maze.getImageBase64(cellSize, showSolution)}/> : null}
         {(mode==="generation") ? <MazeGenerator maze={maze} cellSize={cellSize} setMode={setMode}/> : null}
     </div>

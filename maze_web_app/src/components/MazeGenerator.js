@@ -1,5 +1,6 @@
 
 import {useEffect, useState} from "react"
+import MazeButton from "./MazeButton";
 export default function MazeGenerator({maze, cellSize, setMode}) {
     const numRows = maze.gridRows
     const numCols = maze.gridCols
@@ -47,8 +48,8 @@ export default function MazeGenerator({maze, cellSize, setMode}) {
 
     return (
         <div className = "w-max mx-auto mt-5 mb-5">
-            <button className={`flex mx-auto px-4 mt-5 mb-5 rounded-full text-white ${(generating) ? "bg-red-500" : "bg-blue-500"}`} onClick={() => setMode("image")}>{(generating) ? "Stop Generation" : "Show Maze Image"}</button>
-            <canvas className="bg-black" id="mazeCanvas" width={canvasWidth} height={canvasHeight}></canvas>
+            <MazeButton primaryColour={(generating) ? "red-500" : "blue-500"} buttonText={(generating) ? "Stop Generation" : "Show Maze Image"} onClick={() => setMode("image")}></MazeButton>
+            <canvas className="bg-black mt-5" id="mazeCanvas" width={canvasWidth} height={canvasHeight}></canvas>
         </div>
     );
 }
