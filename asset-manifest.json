@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/MazeWebApp/static/css/main.fe2d7179.css",
+    "main.js": "/MazeWebApp/static/js/main.be0418fc.js",
+    "static/js/453.769bb6f8.chunk.js": "/MazeWebApp/static/js/453.769bb6f8.chunk.js",
+    "index.html": "/MazeWebApp/index.html",
+    "main.fe2d7179.css.map": "/MazeWebApp/static/css/main.fe2d7179.css.map",
+    "main.be0418fc.js.map": "/MazeWebApp/static/js/main.be0418fc.js.map",
+    "453.769bb6f8.chunk.js.map": "/MazeWebApp/static/js/453.769bb6f8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fe2d7179.css",
+    "static/js/main.be0418fc.js"
+  ]
+}
